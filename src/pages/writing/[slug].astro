@@ -30,7 +30,7 @@ export async function getStaticPaths() {
 }
 ---
 <Layout title={article.frontmatter.title}>
-  <SidebarLayout.Header title={article.frontmatter.title} />
+  <SidebarLayout.Header title={article.frontmatter.title} backHref="/writing" client:idle />
   <SidebarLayout>
     <SidebarLayout.Sidebar client:idle />
     <SidebarLayout.Panel title={title} selected={true}>

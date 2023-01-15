@@ -58,7 +58,7 @@ function getColor(color: TextColor) {
         case 'dark':
             return 'text-zinc-900 dark:text-zinc-50'
         case 'muted':
-          return 'text-zinc-600 dark:text-zinc-400'
+          return 'text-zinc-500 dark:text-zinc-400'
         case 'inherit':
           return ''
     }

@@ -24,9 +24,6 @@ const articles = (await Astro.glob('../../content/articles/*.{md,mdx}'))
         ))}
       </div>
     </SidebarLayout.Panel>
-    <SidebarLayout.Pane dots>
-      <div class="w-full min-h-screen bg-white dark:bg-black">
-      </div>
-    </SidebarLayout.Pane>
+    <SidebarLayout.Pane dots />
   </SidebarLayout>
 </Layout>
