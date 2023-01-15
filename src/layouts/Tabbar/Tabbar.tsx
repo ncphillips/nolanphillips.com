@@ -2,8 +2,9 @@ import { useButtonSound } from "../../hooks/useButtonSound"
 import { useSidebar } from "../Sidebar"
 import { Button } from "./Button"
 import { Container } from "./Container"
+import type { LayoutProps } from "./Layout"
 
-export const TabBar: React.FC = () => {
+export const TabBar: React.FC<LayoutProps> = ({sm, md, lg}) => {
   const [play] = useButtonSound()
   const [,toggleSidebarRaw] = useSidebar()
   const toggleSidebar = () => {
@@ -12,7 +13,7 @@ export const TabBar: React.FC = () => {
   }
 
   return (
-    <Container>
+    <Container sm md lg>
       <a href="/">
         <Button icon='home'>
           Home

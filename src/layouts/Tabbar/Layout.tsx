@@ -33,7 +33,7 @@ export const Layout: React.FC<LayoutProps> = ({ sm = true, md = false, lg = fals
 function getBreakpoints(sm: boolean, md: boolean, lg: boolean, noBottomSpace: boolean) {
   if (noBottomSpace) return ''
 
-  let classes = ['pb-20']
+  let classes = ['pb-20 xl:pb-0']
 
   if (sm) classes.push('sm:pb-20')
   else classes.push('sm:pb-0')

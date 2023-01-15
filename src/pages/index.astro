@@ -1,6 +1,14 @@
 ---
-import SidebarLayout from '../layouts/SidebarLayout.astro';
+import Layout from '../layouts/Layout.astro';
+import SidebarLayout from '../layouts/Sidebar';
+
+const title = "I have a poopy butt hole"
 ---
-<SidebarLayout title="Welcome to Astro.">
-  dsfgfdghjasfdhjg
-</SidebarLayout>
+<Layout title={title}>
+  <SidebarLayout>
+    <SidebarLayout.Sidebar client:load />
+    <SidebarLayout.Pane>
+      fdkjdhgsaghjsadjgh
+    </SidebarLayout.Pane>
+  </SidebarLayout>
+</Layout>

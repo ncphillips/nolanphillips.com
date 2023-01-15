@@ -26,13 +26,13 @@ export const Heading: React.FC<HeadingProps> = ({as = 'h2', size = 1, weight = '
 function getSize(size: HeadingSize) {
   switch (size) {
     case 1:
-      return 'font-extrabold text-xl sm:text-2xl lg:text-3xl'
+      return 'font-extrabold text-xl lg:text-2xl'
     case 2:
-      return 'font-extrabold text-lg sm:text-xl lg:text-2xl'
+      return 'font-extrabold text-lg lg:text-xl'
     case 3:
-      return 'font-extrabold text-md sm:text-lg lg:text-xl'
+      return 'font-extrabold text-md lg:text-lg'
     case 4:
-      return 'font-extrabold text-sm sm:text-md lg:text-lg'
+      return 'font-extrabold text-sm lg:text-md'
   }
 }
 
