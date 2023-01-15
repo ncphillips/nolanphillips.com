@@ -1,0 +1,34 @@
+---
+import { basename } from 'path'
+import { CardArticle } from '../../components/CardArticle';
+import PanelLayout from '../../layouts/PanelLayout.astro';
+
+const title = "Writing"
+const articles = (await Astro.glob('../../content/articles/*.{md,mdx}'))
+  .map(article => ({
+    ...article,
+    slug: basename(article.file).split('.')[0]
+  } as any))
+  .filter(article => article.frontmatter.category === Astro.params.category)
+  .sort((a, b) => Date.parse(b.frontmatter.created) - Date.parse(a.frontmatter.created))
+---
+<PanelLayout title={title}>
+  <div slot="panel">
+    <div class="-mx-4 flex flex-col">
+      {articles.map(article => (
+        <CardArticle article={article} />
+        <CardArticle article={article} />
+        <CardArticle article={article} />
+        <CardArticle article={article} />
+        <CardArticle article={article} />
+        <CardArticle article={article} />
+        <CardArticle article={article} />
+        <CardArticle article={article} />
+        <CardArticle article={article} />
+        <CardArticle article={article} />
+        <CardArticle article={article} />
+        <CardArticle article={article} />
+      ))}
+    </div>
+  </div>
+</PanelLayout>

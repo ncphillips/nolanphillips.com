@@ -1,0 +1,39 @@
+---
+import { basename } from 'path'
+import { CardArticle } from '../../components/CardArticle';
+import PanelLayout from '../../layouts/PanelLayout.astro';
+
+const title = "Writing"
+const articles = (await Astro.glob('../../content/articles/*.{md,mdx}'))
+  .map(article => ({
+    ...article,
+    slug: basename(article.file).split('.')[0]
+  } as any))
+  .filter(article => article.frontmatter.category === Astro.params.category)
+  .sort((a, b) => Date.parse(b.frontmatter.created) - Date.parse(a.frontmatter.created))
+const article = articles.find(article => article.slug === Astro.params.slug)
+
+export async function getStaticPaths() {
+  const articles = (await Astro.glob('../../content/articles/*.{md,mdx}'))
+    .map(article => ({
+      ...article,
+      slug: basename(article.file).split('.')[0]
+    } as any))
+
+  return articles.map(article => ({
+    params: { slug: article.slug }
+  }
+))}
+---
+<PanelLayout title={article.title} panelTitle="Writing" active={true}>
+  <div slot="panel">
+    <div class="-mx-4 flex flex-col">
+      {articles.map(article => (
+        <CardArticle article={article} active={article.slug === Astro.params.slug} />
+      ))}
+    </div>
+  </div>
+  <div class="w-full min-h-screen bg-white dark:bg-black">
+    <div class="h-[calc(100vh+100vh)]"></div>
+  </div>
+</PanelLayout>

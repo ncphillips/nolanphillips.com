@@ -1,0 +1,11 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+a:link {
+  color: var(--tw-color-red);
+}
+
+.dark a:link {
+  color: var(--tw-color-red);
+}

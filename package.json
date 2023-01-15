@@ -11,6 +11,23 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^1.9.0"
+    "@astrojs/mdx": "^0.14.0",
+    "@astrojs/prefetch": "^0.1.1",
+    "@astrojs/react": "^1.2.2",
+    "@astrojs/vue": "^1.2.2",
+    "@react-aria/overlays": "^3.12.1",
+    "@tabler/icons": "^1.119.0",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "astro": "^1.9.0",
+    "autoprefixer": "^10.4.13",
+    "js-cookie": "^3.0.1",
+    "react": "^18.0.0",
+    "react-aria": "^3.22.0",
+    "react-dom": "^18.0.0",
+    "remark-reading-time": "^2.0.1",
+    "tailwindcss": "^3.2.4",
+    "vue": "^3.2.30"
   }
 }

@@ -1,0 +1,26 @@
+---
+import { menuItems } from "../content/_menu";
+import MenuItem from "./menuItem.astro";
+import Text from "./typography/Text";
+---
+<ul class="flex flex-col gap-2">
+  {menuItems.map(menuItem => {
+    if ('items' in menuItem) {
+      return (
+        <li class="mt-4">
+          <Text size="sm"><strong>{menuItem.name}</strong></Text>
+          <ul class="flex flex-col gap-2">
+            {menuItem.items.map(menuItem => (
+              <MenuItem {...menuItem} />
+            ))}
+          </ul>
+        </li>
+      )
+    }
+    else {
+      return (
+        <MenuItem {...menuItem} />
+      )
+    }
+  })}
+</ul>
