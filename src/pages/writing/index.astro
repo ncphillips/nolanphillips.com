@@ -17,18 +17,7 @@ const articles = (await Astro.glob('../../content/articles/*.{md,mdx}'))
     <div class="-mx-4 flex flex-col">
       {articles.map(article => (
         <CardArticle article={article} />
-        <CardArticle article={article} />
-        <CardArticle article={article} />
-        <CardArticle article={article} />
-        <CardArticle article={article} />
-        <CardArticle article={article} />
-        <CardArticle article={article} />
-        <CardArticle article={article} />
-        <CardArticle article={article} />
-        <CardArticle article={article} />
-        <CardArticle article={article} />
-        <CardArticle article={article} />
-      ))}
+        ))}
     </div>
   </div>
 </PanelLayout>

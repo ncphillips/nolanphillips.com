@@ -18,4 +18,6 @@ SidebarLayout.Sidebar = Sidebar
 SidebarLayout.Pane = Pane
 SidebarLayout.Panel = Panel
 
+export {useSidebar} from './Sidebar'
+
 export default SidebarLayout

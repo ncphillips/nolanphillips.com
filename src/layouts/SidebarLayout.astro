@@ -13,9 +13,8 @@ const { title } = Astro.props;
 ---
 <Layout title={title}>
   <SidebarLayout>
-    <SidebarLayout.Sidebar>
+    <SidebarLayout.Sidebar client:idle>
       <Heading as='h1' size={4}>Nolan Phillips</Heading>
-      <Menu />
     </SidebarLayout.Sidebar>
     <SidebarLayout.Pane>
       <slot />

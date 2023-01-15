@@ -15,7 +15,7 @@ const { title, panelTitle, active } = Astro.props;
 ---
 <Layout title={title}>
   <SidebarLayout.Header title={title} />
-  <SidebarLayout>
+  <SidebarLayout client:idle>
     <SidebarLayout.Sidebar>
       <Heading as='h1' size={4}>Nolan Phillips</Heading>
       <Menu />
