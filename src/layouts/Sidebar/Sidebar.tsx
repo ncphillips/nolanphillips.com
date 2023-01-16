@@ -27,7 +27,7 @@ export const useSidebar = () => {
 
 export const Sidebar: React.FC = () => {
   const [open] = useSidebar()
-  let classes = ["overflow-x-hidden overflow-y-scroll z-40 fixed top-0 right-[33%] bottom-0 left-0 lg:relative transition-transform lg:translate-x-0 flex flex-col gap-2 md:gap-4 lg:basis-48 shrink-0 h-screen bg-zinc-50 dark:bg-zinc-900 border-r border-1 border-zinc-200 dark:border-zinc-800 shadow-md lg:shadow-none pt-0 p-5"]
+  let classes = ["overflow-x-hidden overflow-y-scroll z-40 fixed top-0 right-[33%] bottom-0 left-0 lg:relative transition-transform lg:translate-x-0 flex flex-col gap-2 md:gap-4 lg:basis-48 shrink-0 h-screen bg-zinc-50 bg-opacity-95 backrdrop-blur-sm dark:bg-zinc-900 dark:bg-opacity-95 border-r border-1 border-zinc-200 dark:border-zinc-800 shadow-md lg:shadow-none pt-0 p-5"]
 
   if (!open) classes.push('-translate-x-full')
   else classes.push('translate-x-0')

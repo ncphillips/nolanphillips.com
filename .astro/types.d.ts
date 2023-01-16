@@ -56,9 +56,37 @@ declare module 'astro:content' {
 
 	const entryMap: {
 		"articles": {
-"test.mdx": {
-  id: "test.mdx",
-  slug: "test",
+"design-grammar.mdx": {
+  id: "design-grammar.mdx",
+  slug: "design-grammar",
+  body: string,
+  collection: "articles",
+  data: any
+},
+"mocking-action-mailer.mdx": {
+  id: "mocking-action-mailer.mdx",
+  slug: "mocking-action-mailer",
+  body: string,
+  collection: "articles",
+  data: any
+},
+"rails-contract-tests.mdx": {
+  id: "rails-contract-tests.mdx",
+  slug: "rails-contract-tests",
+  body: string,
+  collection: "articles",
+  data: any
+},
+"testing-for-change.mdx": {
+  id: "testing-for-change.mdx",
+  slug: "testing-for-change",
+  body: string,
+  collection: "articles",
+  data: any
+},
+"testing-graphql-in-rails.mdx": {
+  id: "testing-graphql-in-rails.mdx",
+  slug: "testing-graphql-in-rails",
   body: string,
   collection: "articles",
   data: any
