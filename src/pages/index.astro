@@ -1,14 +1,15 @@
 ---
+import Heading from '../components/typography/Heading';
 import Layout from '../layouts/Layout.astro';
 import SidebarLayout from '../layouts/Sidebar';
 
-const title = "I have a poopy butt hole"
+const title = "Nolan Phillips"
 ---
 <Layout title={title}>
   <SidebarLayout>
     <SidebarLayout.Sidebar client:load />
     <SidebarLayout.Pane>
-      fdkjdhgsaghjsadjgh
+      <Heading as="h1" size={1}>Nolan Phillips</Heading>
     </SidebarLayout.Pane>
   </SidebarLayout>
 </Layout>
