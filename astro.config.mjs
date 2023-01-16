@@ -18,5 +18,8 @@ import readingMdxTime from "remark-reading-time/mdx";
 export default defineConfig({
   integrations: [prefetch(), react(), vue(), mdx({
     remarkPlugins: [readingTime, readingMdxTime]
-  })]
+  })],
+  markdown: {
+    syntaxHighlight: 'prism'
+  },
 });

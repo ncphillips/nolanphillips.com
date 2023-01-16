@@ -6,12 +6,24 @@ export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type IconProps = {
   name: IconName
   size?: IconSize
+  fill?: boolean
 }
 
-export const Icon: React.FC<IconProps> = ({ name, size = 'xs' }) => {
+export const Icon: React.FC<IconProps> = ({ name, fill, size = 'xs' }) => {
   let classes = [`ti ti-${name} inline-flex flex-col justify-center items-center`]
 
   classes.push(getSize(size))
+
+  if (fill) {
+    return (
+      <span className="group relative inline-block px-1 mx-2">
+        <span className="absolute z-0 -inset-1 group-hover:-inset-2 group-active:-inset-1 rounded-full bg-zinc-200 dark:bg-zinc-800 group-hover:opacity-100 group-active:opacity-100 transition-all duration-200 ease-bounce" />
+        <span className="relative z-10">
+          <i className={classes.join(' ')} />
+        </span>
+      </span>
+    )
+  }
 
   return (
     <i className={classes.join(' ')} />

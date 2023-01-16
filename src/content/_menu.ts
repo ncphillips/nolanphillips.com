@@ -7,6 +7,7 @@ export type MenuItem = {
   name: string
   icon: string
   href: string
+  external?: true
 }
 
 export const menuItems: (MenuItem | MenuCategory)[] = [
@@ -20,14 +21,19 @@ export const menuItems: (MenuItem | MenuCategory)[] = [
     icon: "article",
     href: "/writing"
   },
-  // {
-  //   name: "Me",
-  //   items: [
-  //     {
-  //       name: "Snippets",
-  //       icon: "code",
-  //       href: "/snippets"        
-  //     }
-  //   ]
-  // }
+  {
+    name: "Social",
+    items: [
+      {
+        name: "Twitter",
+        icon: "brand-twitter",
+        href: "https://twitter.com/ncphi"        
+      },
+      {
+        name: "LinkedIn",
+        icon: "brand-linkedin",
+        href: "https://ca.linkedin.com/in/nolan-phillips-70293568"
+      }
+    ]
+  }
 ]

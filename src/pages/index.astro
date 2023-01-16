@@ -1,17 +1,48 @@
 ---
+import { basename } from 'path'
+import { CardArticle } from '../components/CardArticle';
+import Icon from '../components/Icon';
 import Heading from '../components/typography/Heading';
+import Text from '../components/typography/Text';
 import Layout from '../layouts/Layout.astro';
 import SidebarLayout from '../layouts/Sidebar';
+
+const articles = (await Astro.glob('../content/articles/*.mdx')).map(article => ({
+  ...article,
+  slug: basename(article.file).split('.')[0]
+}))
+  .filter(article => article.frontmatter.category === Astro.params.category)
+  .sort((a, b) => Date.parse(b.frontmatter.created) - Date.parse(a.frontmatter.created))
+  .splice(0, 4)
 
 const title = "Nolan Phillips"
 ---
 <Layout title={title}>
   <SidebarLayout>
-    <div class="sticky top-0 h-screen">
+    <div class="sticky top-0 z-40 h-screen">
       <SidebarLayout.Sidebar client:load />
     </div>
     <SidebarLayout.Pane>
-      <Heading as="h1" size={1}>Nolan Phillips</Heading>
+      <div class="mx-auto pt-12 max-w-prose flex flex-col gap-3">
+        <Heading as="h1" size={1}>Nolan Phillips</Heading>
+        <Text>
+          A paragraph about me. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate ornare cursus. Aliquam erat volutpat. Aenean quis massa imperdiet, lacinia lectus ut, volutpat nulla.
+        </Text>
+        <section class="flex flex-col pt-12">
+          <Heading as="h2" size={3}>Writing</Heading>
+          <div class="-mx-4">
+            {articles.map(article => (
+              <CardArticle article={article} />
+            ))}
+          </div>
+          <a href="/writing" class="group pt-2">
+            <Text>
+              All writing
+              <Icon name="arrow-right" fill />
+            </Text>
+          </a>
+        </section>
+      </div>
     </SidebarLayout.Pane>
   </SidebarLayout>
 </Layout>
