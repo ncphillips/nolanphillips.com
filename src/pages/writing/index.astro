@@ -21,7 +21,9 @@ const articles = (await Astro.glob('../../content/articles/*.{md,mdx}'))
       <SidebarLayout.Sidebar client:idle />
     </div>
     <SidebarLayout.Panel title="Writing">
-      <Heading as="h2">Writing</Heading>
+      <span class="lg:hidden">
+        <Heading as="h2">Writing</Heading>
+      </span>
       <div class="-mx-4 flex z-40 flex-col">
         {articles.map(article => (
           <CardArticle article={article} />
