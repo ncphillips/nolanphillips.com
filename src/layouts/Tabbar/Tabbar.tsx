@@ -13,7 +13,7 @@ export const TabBar: React.FC<LayoutProps> = ({sm, md, lg}) => {
   }
 
   return (
-    <Container sm md lg>
+    <Container sm md>
       <a href="/">
         <Button icon='home'>
           Home
@@ -24,9 +24,9 @@ export const TabBar: React.FC<LayoutProps> = ({sm, md, lg}) => {
           Writing
         </Button>
       </a>
-      <Button icon='menu-2' onClick={toggleSidebar}>
+      {/* <Button icon='menu-2' onClick={toggleSidebar}>
         More
-      </Button>
+      </Button> */}
     </Container>
   )
 }

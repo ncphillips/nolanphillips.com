@@ -20,14 +20,14 @@ export const menuItems: (MenuItem | MenuCategory)[] = [
     icon: "article",
     href: "/writing"
   },
-  {
-    name: "Me",
-    items: [
-      {
-        name: "Snippets",
-        icon: "code",
-        href: "/snippets"        
-      }
-    ]
-  }
+  // {
+  //   name: "Me",
+  //   items: [
+  //     {
+  //       name: "Snippets",
+  //       icon: "code",
+  //       href: "/snippets"        
+  //     }
+  //   ]
+  // }
 ]
