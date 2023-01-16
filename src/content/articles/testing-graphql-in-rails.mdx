@@ -1,0 +1,163 @@
+---
+title: Testing GraphQL in Rails
+---
+
+## Goals
+
+When we set out to test our GraphQL API we wanted 3 things:
+
+1. To write GQL queries as a string
+2. To keep network details out of spec files
+3. To keep GQL queries out of individual tests
+
+> **Assumptions:** This article assumes you have a working Rails app with authentication and GraphQL already setup. The examples below are written with `devise`, `rspec`, `factory-bot`, and `graphql-ruby`.
+
+## Writing Queries
+
+We needed some help. We want to write our queries as strings, and we don't want our specs to know about network requests. To take care of that, we create a helper method that we will include in all of our Specs.
+
+**spec/graphql_helper.rb**
+```ruby
+module GraphqlHelper
+  def gql(query)
+    body = { query: query }
+
+    post '/api/graphql', params: body
+
+    JSON.parse(response.body)
+  end
+end
+```
+
+RSpec let's us add modules at configuration time:
+
+**spec/rails_helper.rb**
+```ruby
+RSpec.configure do |config|
+   config.include GraphqlHelper
+   # ...
+end
+
+```
+
+## What are we testing?
+
+We're going to write a couple test for querying the currently logged in user.
+
+**spec/graph/current_user_spec.rb**
+```ruby
+require 'rails_helper'
+
+describe 'Current User Graph', type: :request do
+  it 'is nil when not logged in'
+  it 'is the signed in user'
+end
+```
+
+**Note:** Make sure to add `type: request` to the describe block.
+
+## Define the Query
+
+Adding a query method to the test-class helps keep the individual specs clean. Let's add it as a private method so it's clearly separated from the specs:
+
+**spec/graph/current_user_spec.rb**
+```ruby
+describe 'Current User Graph', type: :request do
+  it 'is nil when not logged in'
+  it 'is the signed in user'
+
+  private
+
+  def query_user
+    response = gql <<-GQL
+      query CurrentUserSpec {
+        user {
+          firstName
+          lastName
+        }
+      }
+    GQL
+
+    response.dig('data', 'user')
+  end
+end
+```
+It's often useful to dig the value you're interested in out of the response. This really makes checking the data easier. 
+
+## Testing the logged-out state
+
+There is no user when we're logged out, so we need to test for that. Thanks to our helpers it is a very small test:
+
+**spec/graph/current_user.rb**
+```ruby
+describe 'Current User Graph', type: :request do
+  it 'is nil when not logged in' do
+    user_data = query_user
+
+    expect(user_data).to be_nil
+  end
+  
+  #...
+end
+```
+
+## Testing the logged-in state
+
+
+**spec/graph/current_user_spec.rb**
+```ruby
+describe 'Current User Graph', type: :request do
+  # ...
+  
+  it 'is the signed in user' do
+    user = FactoryBot.create(:user)
+    sign_in user
+
+    user_data = query_user
+
+    expect(user_data['firstName']).to eq(user.first_name)
+    expect(user_data['lastName']).to eq(user.last_name)
+  end
+end
+```
+
+## Review
+
+Here is the end-state of our `current_user_spec`.
+```ruby
+require 'rails_helper'
+
+describe 'Current User Graph', type: :request do
+  it 'is nil when not logged in' do
+    user_data = query_user
+
+    expect(user_data).to be_nil
+  end
+
+  it 'is the signed in user' do
+    user = FactoryBot.create(:user)
+    sign_in user
+
+    user_data = query_user
+
+    expect(user_data['firstName']).to eq(user.first_name)
+    expect(user_data['lastName']).to eq(user.last_name)
+  end
+
+  private
+
+  def query_user
+    response = gql <<-GQL
+      query CurrentUserSpec {
+        user {
+          firstName
+          lastName
+        }
+      }
+    GQL
+
+    response.dig('data', 'user')
+  end
+end
+```
+

@@ -1,0 +1,84 @@
+---
+title: An Introduction to Contract Testing in Rails
+---
+
+After years of listening to [J.B. Rainsberger](https://twitter.com/jbrains) tell me Contract tests are great, I finally started listening. 
+
+I always assumed they were confusing or hard for some reason. Turns out I was *really* wrong. To help you along I've written this short tutorial on how to write Contract Tests in Rails with RSPec.
+
+## Duck Typing
+
+One of the great things about dynamic languages is [Duck Typing](https://realpython.com/lessons/duck-typing/#:~:text=Duck%20typing%20is%20a%20concept,a%20given%20method%20or%20attribute.). This allows us to define methods that aren't fussy about the type of objects they're given. As long as it has the methods we need and they work roughly how we expect, we'll take it!
+
+## A Problem with Duck Typing
+
+How can we be really confident that our objects behave correctly?
+
+You *could* write two separate test suites that essentially have duplicate tests. Unfortunately, as time passes those test suites will almost certainly drift apart. As your team grows, and more objects are added that should fit the contract, the likelihood of forgetting to sync changes rises.
+
+Instead we can write a Contract.
+
+## What is a Contract?
+
+A Contract is simply a description of how to work with an object.
+
+In theory, Contracts are similar to Interfaces. Like an Interface, a Contract tells you what methods an object should have. **But unlike an Interface, a Contract *also* tells you how an object should behave.**
+
+In practice, Contracts are shareable test suites. They are written to test any type of object. By adding them to your object's test suite you can ensure that it properly adheres to the contract. Better yet, it will be fully covered by tests without having to write any duplicate test code.
+
+## Example: Writing Contracts in RSPec
+
+RSpec has a feature called [`shared_examples`](https://relishapp.com/rspec/rspec-core/docs/example-groups/shared-examples) which lets you include tests into any test suite. We'll look at a real example of a Contract test I added to the codebase at work. 
+
+At [HeartPayroll](https://heartpayroll.com) (HP) we have two kinds of accounts: `Employers` and `Employees`. These are separate tables, with a lot of difference, but they do have some things in common. For example, they both have first and last names and convenience methods for displaying them (e.g. `account.full_name`, `account.last_name_first_name`)
+
+In essence, the `Employee` and `Employer` classes share a "Contract". Anytime we're looking to display information about an account, we expect to be given either class. 
+
+To ensure these classes behave as expected, I created a new contract in the spec folder:
+
+**spec/contracts/nameable.rb**
+```ruby
+RSpec.shared_examples 'nameable' do |nameable_factory|
+  describe '#full_name' do
+    it 'returns full name' do
+      nameable = FactoryBot.build(nameable_factory)
+
+      expect(nameable.full_name).to eq([nameable.first_name, nameable.last_name].compact.join(' ').strip)
+    end
+  end
+end
+```
+
+This spec file is a bit different than the usual spec. 
+* It uses `RSpec.shared_examples` not `RSpec.describe`
+* It accepts `nameable_factory`
+* It dynamically constructs it's subject using the passed in `nameable_factory`
+
+This is effectively an Abstract Test Suite. It can run on any type of object to ensure it adheres to the "Nameable" Contract. 
+
+To include it with our specs, we can use the [`include_examples` method](https://relishapp.com/rspec/rspec-core/docs/example-groups/shared-examples) in both our Employer specs...
+
+**spec/models/employer.rb**
+```ruby
+require 'contracts/nameable'
+
+RSpec.describe Employer, type: :model do
+  include_examples 'nameable', :employer
+
+  # ...rest of Employer tests...
+end
+```
+
+And in the Employee specs
+
+**spec/models/employee.rb**
+```ruby
+require 'contracts/nameable'
+
+RSpec.describe Employee, type: :model do
+  include_examples 'nameable', :employee
+
+  # ...rest of Employee tests...
+end
+```
+

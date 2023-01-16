@@ -1,0 +1,82 @@
+---
+title: Can we make  a grammar for our design system?
+description: | 
+  Design tokens are not enough to ensure visual consistency. Could a grammar help us with that goal?
+created: 2021-06-18
+---
+
+As the only person building [HeartPayroll](https://heartpayroll.com) I find myself needing to wear two hats: developer and designer. This is fun, but it means I don't have a lot of time to really think about the visual design of the application. Instead, I've spent a little time building out a **design system** that takes care of most of these thoughts for me.
+
+Much of what I've read and built around design systems has been about the individual components. These rules of thumb have helped make components that are easily reused in a variety of context. While this has been massive benefit, I still find myself struggling to consistently answer questions at the page level:
+
+* How much padding should be on the page?
+    
+* How much big should the gap be between the Heading and Headline?
+    
+* Should those Cards be grouped together?
+    
+* Does the submit button float left or right in the Card?
+    
+
+I have been struggling with these questions because **what I have is a language without a grammar**. A bunch of words with definitions, but with no syntax to bind them together.
+
+This question has really interested me, so I've started to define a [Formal grammar](https://en.wikipedia.org/wiki/Formal_grammar) for my design system.
+
+```plaintext
+# ======
+# Legend
+# ======
+# Anything: .
+# Optional: ?
+# Any number of: *
+# At least 1: +
+# Or: ||
+
+Page –> 
+  Title 
+  Layout
+
+Layout –> 
+  Navigation? 
+  Main 
+  Footer?
+
+Main –> 
+  Header
+  Content
+
+Header –> 
+  Backlink? 
+  Heading 
+  Headline?
+
+Content –> 
+  Card*
+
+Card –> 
+  Heading 
+  .*
+
+Form –> 
+  Fieldset+  
+  FormResponse
+
+Fieldset –> 
+  Legend? 
+  Field+
+
+FormActions –> 
+  Submit 
+  Cancel?
+
+FormResponse –> 
+  SuccessResponse || FailureResponse
+```
+
+So with this grammar I have a couple follow up questions:
+
+How can I express it in code so that it is easy to adhere to?
+
+Can I ensure that any valid "sentences" provide a visually consistent UI?
+
+I'll find out
