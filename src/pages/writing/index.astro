@@ -17,7 +17,9 @@ const articles = (await Astro.glob('../../content/articles/*.{md,mdx}'))
 <Layout title="Writing">
   <SidebarLayout.Header title={title} />
   <SidebarLayout>
-    <SidebarLayout.Sidebar client:idle />
+    <div class="sticky top-0 h-screen">
+      <SidebarLayout.Sidebar client:idle />
+    </div>
     <SidebarLayout.Panel title="Writing">
       <Heading as="h2">Writing</Heading>
       <div class="-mx-4 flex flex-col">

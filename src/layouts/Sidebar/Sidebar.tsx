@@ -27,18 +27,17 @@ export const useSidebar = () => {
 
 export const Sidebar: React.FC = () => {
   const [open] = useSidebar();
-  let classes = [
-    "overflow-x-hidden overflow-y-auto z-40 fixed top-0 right-[33%] bottom-0 left-0 lg:relative transition-transform lg:translate-x-0 flex flex-col gap-2 md:gap-4 lg:basis-48 shrink-0 h-screen bg-zinc-50 bg-opacity-95 backrdrop-blur-sm dark:bg-zinc-900 dark:bg-opacity-95 border-r border-1 border-zinc-200 dark:border-zinc-800 shadow-md lg:shadow-none pt-0 p-5",
-  ];
 
-  if (!open) classes.push("-translate-x-full");
-  else classes.push("translate-x-0");
+  const navClasses = [...baseNavClasses];
+
+  if (!open) navClasses.push("-translate-x-full");
+  else navClasses.push("translate-x-0");
 
   return (
     <>
       {open && <Backdrop />}
-      <nav className={classes.join(" ")}>
-        <div className="sticky top-0 bg-zinc-50 dark:bg-zinc-900 bg-opacity-70 backdrop-blur-sm p-5 pb-2 -mx-5">
+      <nav className={navClasses.join(" ")}>
+        <div className={navHeaderClasses}>
           <Heading as="h1" size={4}>
             Nolan Phillips
           </Heading>
@@ -51,6 +50,62 @@ export const Sidebar: React.FC = () => {
     </>
   );
 };
+
+let baseNavClasses = [
+  "top-0",
+  "right-[33%]",
+  "left-0",
+  "bottom-0",
+
+  "fixed",
+  "lg:relative",
+  "min-w-[200px]",
+
+  "z-40",
+  "overflow-x-hidden",
+  "overflow-y-auto",
+
+  "transition-transform",
+  "lg:translate-x-0",
+
+  "flex",
+  "flex-col",
+  "gap-2",
+  "shrink-0",
+  "md:gap-4",
+  "lg:basis-48",
+  "h-screen",
+
+  "bg-zinc-50",
+  "bg-opacity-95",
+  "backdrop-blur-sm",
+
+  "border-r",
+  "border-1",
+  "border-zinc-200",
+
+  "dark:bg-zinc-900",
+  "dark:bg-opacity-95",
+  "dark:border-zinc-800",
+
+  "shadow-md",
+  "lg:shadow-none",
+
+  "pt-0",
+  "p-5",
+];
+
+const navHeaderClasses = [
+  "sticky",
+  "top-0",
+  "bg-opacity-70",
+  "bg-zinc-50",
+  "dark:bg-zinc-900",
+  "backdrop-blur-sm",
+  "p-5",
+  "pb-2",
+  "-mx-5",
+].join(" ");
 
 const Backdrop = () => {
   const [, toggleSidebar] = useSidebar();

@@ -7,7 +7,9 @@ const title = "Nolan Phillips"
 ---
 <Layout title={title}>
   <SidebarLayout>
-    <SidebarLayout.Sidebar client:load />
+    <div class="sticky top-0 h-screen">
+      <SidebarLayout.Sidebar client:load />
+    </div>
     <SidebarLayout.Pane>
       <Heading as="h1" size={1}>Nolan Phillips</Heading>
     </SidebarLayout.Pane>
