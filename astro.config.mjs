@@ -1,18 +1,18 @@
-import { defineConfig } from "astro/config";
+import { defineConfig } from "astro/config"
 
 // https://astro.build/config
-import prefetch from "@astrojs/prefetch";
+import prefetch from "@astrojs/prefetch"
 
 // https://astro.build/config
-import react from "@astrojs/react";
+import react from "@astrojs/react"
 
 // https://astro.build/config
-import vue from "@astrojs/vue";
+import vue from "@astrojs/vue"
 
 // https://astro.build/config
-import mdx from "@astrojs/mdx";
-import readingTime from "remark-reading-time";
-import readingMdxTime from "remark-reading-time/mdx";
+import mdx from "@astrojs/mdx"
+import readingTime from "remark-reading-time"
+import readingMdxTime from "remark-reading-time/mdx"
 
 // https://astro.build/config
 export default defineConfig({
@@ -27,4 +27,4 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: "prism",
   },
-});
+})

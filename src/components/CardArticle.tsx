@@ -1,13 +1,13 @@
-import { prettyDate } from "../lib/prettyDate";
-import Heading from "./typography/Heading";
-import Text from "./typography/Text";
+import { prettyDate } from "../lib/prettyDate"
+import Heading from "./typography/Heading"
+import Text from "./typography/Text"
 
-export type Article = any;
+export type Article = any
 
 export type CardArticleProps = {
-  article: Article;
-  active?: boolean;
-};
+  article: Article
+  active?: boolean
+}
 
 export const CardArticle: React.FC<CardArticleProps> = ({
   article,
@@ -15,9 +15,9 @@ export const CardArticle: React.FC<CardArticleProps> = ({
 }) => {
   const classes = [
     "absolute z-0 inset-1 group-hover:-inset-0 group-active:-inset-1 rounded-2xl bg-zinc-200 dark:bg-zinc-800 opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-all duration-200 ease-bounce",
-  ];
+  ]
 
-  if (active) classes.push("opacity-100");
+  if (active) classes.push("opacity-100")
 
   return (
     <a href={`/writing/${article.slug}`} rel="prefetch">
@@ -36,5 +36,5 @@ export const CardArticle: React.FC<CardArticleProps> = ({
         </span>
       </article>
     </a>
-  );
-};
+  )
+}

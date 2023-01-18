@@ -1,11 +1,11 @@
 ---
-import { basename } from "path";
-import Layout from "../../layouts/Layout.astro";
-import SidebarLayout from "../../layouts/Sidebar";
-import { CardArticle } from "../../components/CardArticle";
-import Heading from "../../components/typography/Heading";
+import { basename } from "path"
+import Layout from "../../layouts/Layout.astro"
+import SidebarLayout from "../../layouts/Sidebar"
+import { CardArticle } from "../../components/CardArticle"
+import Heading from "../../components/typography/Heading"
 
-const title = "Writing";
+const title = "Writing"
 const articles = (await Astro.glob("../../content/articles/*.{md,mdx}"))
   .map(
     (article) =>
@@ -18,7 +18,7 @@ const articles = (await Astro.glob("../../content/articles/*.{md,mdx}"))
   .sort(
     (a, b) =>
       Date.parse(b.frontmatter.created) - Date.parse(a.frontmatter.created)
-  );
+  )
 ---
 
 <Layout title="Writing">

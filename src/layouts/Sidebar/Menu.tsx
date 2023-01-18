@@ -1,6 +1,6 @@
-import Icon from "../../components/Icon";
-import Text from "../../components/typography/Text";
-import { MenuItem as MenuItemProps, menuItems } from "../../content/_menu";
+import Icon from "../../components/Icon"
+import Text from "../../components/typography/Text"
+import { MenuItem as MenuItemProps, menuItems } from "../../content/_menu"
 
 export const Menu = () => (
   <ul className="flex flex-col gap-2 mt-4">
@@ -19,13 +19,13 @@ export const Menu = () => (
               ))}
             </ul>
           </li>
-        );
+        )
       } else {
-        return <MenuItem {...menuItem} />;
+        return <MenuItem {...menuItem} />
       }
     })}
   </ul>
-);
+)
 
 const MenuItem: React.FC<MenuItemProps & { active?: true }> = ({
   active,
@@ -33,12 +33,12 @@ const MenuItem: React.FC<MenuItemProps & { active?: true }> = ({
   name,
   icon,
 }) => {
-  const isExternal = href.startsWith("http");
+  const isExternal = href.startsWith("http")
   const classes = [
     "absolute z-0 inset-1 group-hover:-inset-0 group-active:-inset-1 rounded-lg bg-zinc-200 dark:bg-zinc-800 opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-all duration-200 ease-bounce",
-  ];
+  ]
 
-  if (active) classes.push("opacity-100");
+  if (active) classes.push("opacity-100")
 
   return (
     <a href={href} rel="prefetch" target={isExternal ? "_blank" : "_self"}>
@@ -55,5 +55,5 @@ const MenuItem: React.FC<MenuItemProps & { active?: true }> = ({
         </span>
       </li>
     </a>
-  );
-};
+  )
+}

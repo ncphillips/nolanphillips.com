@@ -1,11 +1,11 @@
 ---
-import { basename } from "path";
-import { CardArticle } from "../components/CardArticle";
-import Icon from "../components/Icon";
-import Heading from "../components/typography/Heading";
-import Text from "../components/typography/Text";
-import Layout from "../layouts/Layout.astro";
-import SidebarLayout from "../layouts/Sidebar";
+import { basename } from "path"
+import { CardArticle } from "../components/CardArticle"
+import Icon from "../components/Icon"
+import Heading from "../components/typography/Heading"
+import Text from "../components/typography/Text"
+import Layout from "../layouts/Layout.astro"
+import SidebarLayout from "../layouts/Sidebar"
 
 const articles = (await Astro.glob("../content/articles/*.mdx"))
   .map((article) => ({
@@ -17,9 +17,9 @@ const articles = (await Astro.glob("../content/articles/*.mdx"))
     (a, b) =>
       Date.parse(b.frontmatter.created) - Date.parse(a.frontmatter.created)
   )
-  .splice(0, 4);
+  .splice(0, 4)
 
-const title = "Nolan Phillips";
+const title = "Nolan Phillips"
 ---
 
 <Layout title={title}>

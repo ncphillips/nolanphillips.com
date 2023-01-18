@@ -1,22 +1,22 @@
-import React, { HTMLAttributes, ReactNode, RefObject, useRef } from "react";
-import { useDialog, useOverlay, FocusScope, useId } from "react-aria";
-import { DialogPortal } from "./DialogPortal";
+import React, { HTMLAttributes, ReactNode, RefObject, useRef } from "react"
+import { useDialog, useOverlay, FocusScope, useId } from "react-aria"
+import { DialogPortal } from "./DialogPortal"
 
 export type DialogProps<IsAlert = boolean> = {
-  children: (props: DialogRenderChildrenProps) => ReactNode;
-  autoFocus?: boolean;
-  isOpen?: boolean;
-  isAlert?: IsAlert;
-  isDismissable?: IsAlert extends true ? never : boolean;
-  onClose?: () => void;
-};
+  children: (props: DialogRenderChildrenProps) => ReactNode
+  autoFocus?: boolean
+  isOpen?: boolean
+  isAlert?: IsAlert
+  isDismissable?: IsAlert extends true ? never : boolean
+  onClose?: () => void
+}
 
 export type DialogRenderChildrenProps = {
-  titleProps: Omit<HTMLAttributes<HTMLElement>, "css">;
-  dialogProps: Omit<HTMLAttributes<HTMLElement>, "css">;
-  underlayProps: Omit<HTMLAttributes<HTMLElement>, "css">;
-  dialogRef: RefObject<any>;
-};
+  titleProps: Omit<HTMLAttributes<HTMLElement>, "css">
+  dialogProps: Omit<HTMLAttributes<HTMLElement>, "css">
+  underlayProps: Omit<HTMLAttributes<HTMLElement>, "css">
+  dialogRef: RefObject<any>
+}
 
 /**
  * Renders an on-screen overlay that does not prevent
@@ -27,9 +27,9 @@ export type DialogRenderChildrenProps = {
  * @returns
  */
 export const Dialog: React.FC<DialogProps> = (props) => {
-  const { isOpen, isAlert, isDismissable, autoFocus, children } = props;
-  const ref = useRef<HTMLElement | null>(null);
-  const id = useId("cgc-dialog-" + Date.now().toString());
+  const { isOpen, isAlert, isDismissable, autoFocus, children } = props
+  const ref = useRef<HTMLElement | null>(null)
+  const id = useId("cgc-dialog-" + Date.now().toString())
   const { overlayProps, underlayProps } = useOverlay(
     {
       ...props,
@@ -37,7 +37,7 @@ export const Dialog: React.FC<DialogProps> = (props) => {
       isKeyboardDismissDisabled: isAlert === true ? true : !isDismissable,
     },
     ref
-  );
+  )
   const { dialogProps, titleProps } = useDialog(
     {
       ...props,
@@ -45,7 +45,7 @@ export const Dialog: React.FC<DialogProps> = (props) => {
       "aria-labelledby": id,
     },
     ref
-  );
+  )
 
   if (isOpen) {
     return (
@@ -61,13 +61,13 @@ export const Dialog: React.FC<DialogProps> = (props) => {
           </FocusScope>
         </div>
       </DialogPortal>
-    );
+    )
   }
 
-  return null;
-};
+  return null
+}
 
 Dialog.defaultProps = {
   isOpen: false,
   isDismissable: true,
-};
+}

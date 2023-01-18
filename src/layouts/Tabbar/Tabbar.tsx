@@ -1,16 +1,16 @@
-import { useButtonSound } from "../../hooks/useButtonSound";
-import { useSidebar } from "../Sidebar";
-import { Button } from "./Button";
-import { Container } from "./Container";
-import type { LayoutProps } from "./Layout";
+import { useButtonSound } from "../../hooks/useButtonSound"
+import { useSidebar } from "../Sidebar"
+import { Button } from "./Button"
+import { Container } from "./Container"
+import type { LayoutProps } from "./Layout"
 
 export const TabBar: React.FC<LayoutProps> = ({ sm, md, lg }) => {
-  const [play] = useButtonSound();
-  const [, toggleSidebarRaw] = useSidebar();
+  const [play] = useButtonSound()
+  const [, toggleSidebarRaw] = useSidebar()
   const toggleSidebar = () => {
-    play();
-    toggleSidebarRaw();
-  };
+    play()
+    toggleSidebarRaw()
+  }
 
   return (
     <Container sm md>
@@ -24,5 +24,5 @@ export const TabBar: React.FC<LayoutProps> = ({ sm, md, lg }) => {
         More
       </Button>
     </Container>
-  );
-};
+  )
+}

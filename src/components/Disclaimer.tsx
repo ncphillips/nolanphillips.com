@@ -1,10 +1,10 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react"
 
-export type DisclaimerType = "primary" | "success" | "warning" | "info";
+export type DisclaimerType = "primary" | "success" | "warning" | "info"
 
 export type DisclaimerProps = PropsWithChildren & {
-  type: DisclaimerType;
-};
+  type: DisclaimerType
+}
 
 export const Disclaimer: React.FC<DisclaimerProps> = ({
   children,
@@ -12,24 +12,24 @@ export const Disclaimer: React.FC<DisclaimerProps> = ({
 }) => {
   let classes = [
     "rounded-md p-4 border-l-4 border bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700",
-  ];
+  ]
 
-  classes.push(getType(type));
+  classes.push(getType(type))
 
-  return <aside className={classes.join(" ")}>{children}</aside>;
-};
+  return <aside className={classes.join(" ")}>{children}</aside>
+}
 
 function getType(type: DisclaimerType) {
   switch (type) {
     case "primary":
-      return "border-l-purple-500 dark:border-l-purple-500";
+      return "border-l-purple-500 dark:border-l-purple-500"
     case "success":
-      return "border-l-green-500 dark:border-l-green-500";
+      return "border-l-green-500 dark:border-l-green-500"
     case "warning":
-      return "border-l-amber-500 dark:border-l-amber-500";
+      return "border-l-amber-500 dark:border-l-amber-500"
     case "info":
-      return "border-l-blue-500 dark:border-l-blue-500";
+      return "border-l-blue-500 dark:border-l-blue-500"
   }
 }
 
-export default Disclaimer;
+export default Disclaimer

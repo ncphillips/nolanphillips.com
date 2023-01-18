@@ -1,6 +1,6 @@
-import React from "react";
-import { SSRProvider } from "react-aria";
-import { ModalProviderProps, OverlayProvider } from "@react-aria/overlays";
+import React from "react"
+import { SSRProvider } from "react-aria"
+import { ModalProviderProps, OverlayProvider } from "@react-aria/overlays"
 
 export const DialogProvider: React.FC<ModalProviderProps> = ({
   children,
@@ -10,5 +10,5 @@ export const DialogProvider: React.FC<ModalProviderProps> = ({
     <SSRProvider>
       <OverlayProvider {...props}>{children}</OverlayProvider>
     </SSRProvider>
-  );
-};
+  )
+}

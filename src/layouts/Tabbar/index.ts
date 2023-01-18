@@ -1,12 +1,12 @@
-import { TabBar as TabBarComponent } from "./Tabbar";
-import { Layout } from "./Layout";
+import { TabBar as TabBarComponent } from "./Tabbar"
+import { Layout } from "./Layout"
 
 export type TabBarShape = typeof TabBarComponent & {
-  Layout: typeof Layout;
-};
+  Layout: typeof Layout
+}
 
-export const TabBar = TabBarComponent as TabBarShape;
+export const TabBar = TabBarComponent as TabBarShape
 
-TabBar.Layout = Layout;
+TabBar.Layout = Layout
 
-export default TabBar;
+export default TabBar

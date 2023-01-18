@@ -1,5 +1,5 @@
-import Heading from "./Heading";
-import Text from "./Text";
+import Heading from "./Heading"
+import Text from "./Text"
 
 export const components = {
   h1: (props: any) => (
@@ -62,6 +62,6 @@ export const components = {
       </Text>
     </div>
   ),
-};
+}
 
-export default components;
+export default components

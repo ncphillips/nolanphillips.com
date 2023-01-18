@@ -1,37 +1,37 @@
-import { useEffect, useState } from "react";
-import { usePreventScroll } from "react-aria";
-import { ThemeToggle } from "../../components/ThemeToggle";
-import Heading from "../../components/typography/Heading";
-import { Menu } from "./Menu";
+import { useEffect, useState } from "react"
+import { usePreventScroll } from "react-aria"
+import { ThemeToggle } from "../../components/ThemeToggle"
+import Heading from "../../components/typography/Heading"
+import { Menu } from "./Menu"
 
-export const SIDEBAR_EVENT = "sidebar.toggle";
+export const SIDEBAR_EVENT = "sidebar.toggle"
 
 export const useSidebar = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const toggleOpen = () => setIsOpen(!isOpen);
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const toggleOpen = () => setIsOpen(!isOpen)
   const toggleSidebar = () => {
-    const event = new CustomEvent(SIDEBAR_EVENT);
-    document.dispatchEvent(event);
-  };
+    const event = new CustomEvent(SIDEBAR_EVENT)
+    document.dispatchEvent(event)
+  }
 
   useEffect(() => {
     let cb = () => {
-      toggleOpen();
-    };
+      toggleOpen()
+    }
 
-    document.addEventListener(SIDEBAR_EVENT, cb);
-  }, [isOpen]);
+    document.addEventListener(SIDEBAR_EVENT, cb)
+  }, [isOpen])
 
-  return [isOpen, toggleSidebar] as const;
-};
+  return [isOpen, toggleSidebar] as const
+}
 
 export const Sidebar: React.FC = () => {
-  const [open] = useSidebar();
+  const [open] = useSidebar()
 
-  const navClasses = [...baseNavClasses];
+  const navClasses = [...baseNavClasses]
 
-  if (!open) navClasses.push("-translate-x-full");
-  else navClasses.push("translate-x-0");
+  if (!open) navClasses.push("-translate-x-full")
+  else navClasses.push("translate-x-0")
 
   return (
     <>
@@ -48,8 +48,8 @@ export const Sidebar: React.FC = () => {
         </div>
       </nav>
     </>
-  );
-};
+  )
+}
 
 let baseNavClasses = [
   "top-0",
@@ -93,7 +93,7 @@ let baseNavClasses = [
 
   "pt-0",
   "p-5",
-];
+]
 
 const navHeaderClasses = [
   "sticky",
@@ -105,19 +105,19 @@ const navHeaderClasses = [
   "p-5",
   "pb-2",
   "-mx-5",
-].join(" ");
+].join(" ")
 
 const Backdrop = () => {
-  const [, toggleSidebar] = useSidebar();
+  const [, toggleSidebar] = useSidebar()
 
-  usePreventScroll();
+  usePreventScroll()
 
   return (
     <button
       className="z-40 lg:hidden fixed top-0 right-0 bottom-0 left-0 bg-black bg-opacity-50 backdrop-blur-sm"
       onClick={toggleSidebar}
     />
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

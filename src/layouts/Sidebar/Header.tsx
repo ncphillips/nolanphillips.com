@@ -1,11 +1,11 @@
-import type { PropsWithChildren } from "react";
-import ButtonBack from "../../components/ButtonBack";
-import Heading from "../../components/typography/Heading";
+import type { PropsWithChildren } from "react"
+import ButtonBack from "../../components/ButtonBack"
+import Heading from "../../components/typography/Heading"
 
 export type HeaderProps = PropsWithChildren & {
-  title: string;
-  backHref?: string;
-};
+  title: string
+  backHref?: string
+}
 
 export const Header: React.FC<HeaderProps> = ({
   title,
@@ -28,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       {children}
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

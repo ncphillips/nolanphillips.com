@@ -1,33 +1,33 @@
-import { useState, useEffect } from "react";
-import { useButtonSound } from "../hooks/useButtonSound";
-import { Button } from "./Button";
-import Icon from "./Icon";
+import { useState, useEffect } from "react"
+import { useButtonSound } from "../hooks/useButtonSound"
+import { Button } from "./Button"
+import Icon from "./Icon"
 
 export type BackButtonProps = {
-  defaultHref?: string;
-};
+  defaultHref?: string
+}
 
 export const ButtonBack: React.FC<BackButtonProps> = ({ defaultHref }) => {
-  const [play] = useButtonSound();
-  const [canGoBack, setCanGoBack] = useState(defaultHref !== undefined);
+  const [play] = useButtonSound()
+  const [canGoBack, setCanGoBack] = useState(defaultHref !== undefined)
   const goBack = () => {
     if (document.referrer.includes(window.location.host)) {
-      play();
-      history.back();
+      play()
+      history.back()
     } else if (defaultHref) {
-      play();
-      window.location.href = defaultHref;
+      play()
+      window.location.href = defaultHref
     }
-  };
+  }
 
   useEffect(() => {
     if (document.referrer.includes(window.location.host)) {
-      setCanGoBack(true);
+      setCanGoBack(true)
     }
-  }, []);
+  }, [])
 
   if (!canGoBack) {
-    return <div />;
+    return <div />
   }
 
   return (
@@ -35,7 +35,7 @@ export const ButtonBack: React.FC<BackButtonProps> = ({ defaultHref }) => {
       <Icon name="chevron-left" />
       <span className="sr-only">Go back</span>
     </Button>
-  );
-};
+  )
+}
 
-export default ButtonBack;
+export default ButtonBack

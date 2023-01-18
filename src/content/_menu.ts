@@ -1,14 +1,14 @@
 export type MenuCategory = {
-  name: string;
-  items: MenuItem[];
-};
+  name: string
+  items: MenuItem[]
+}
 
 export type MenuItem = {
-  name: string;
-  icon: string;
-  href: string;
-  external?: true;
-};
+  name: string
+  icon: string
+  href: string
+  external?: true
+}
 
 export const menuItems: (MenuItem | MenuCategory)[] = [
   {
@@ -36,4 +36,4 @@ export const menuItems: (MenuItem | MenuCategory)[] = [
       },
     ],
   },
-];
+]

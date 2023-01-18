@@ -1,13 +1,13 @@
-import type { HTMLAttributes, PropsWithChildren } from "react";
-import { useButtonSound } from "../../hooks/useButtonSound";
-import { useVolume } from "../../hooks/useVolume";
-import { Icon, IconName } from "../../components/Icon";
+import type { HTMLAttributes, PropsWithChildren } from "react"
+import { useButtonSound } from "../../hooks/useButtonSound"
+import { useVolume } from "../../hooks/useVolume"
+import { Icon, IconName } from "../../components/Icon"
 
 export type ButtonProps = PropsWithChildren &
   Omit<HTMLAttributes<HTMLButtonElement>, "onClick"> & {
-    icon: IconName;
-    onClick?: () => void;
-  };
+    icon: IconName
+    onClick?: () => void
+  }
 
 export const Button: React.FC<ButtonProps> = ({
   icon,
@@ -15,12 +15,12 @@ export const Button: React.FC<ButtonProps> = ({
   onClick: propOnClick,
   ...props
 }) => {
-  const [volume] = useVolume();
-  const [buttonSound] = useButtonSound();
+  const [volume] = useVolume()
+  const [buttonSound] = useButtonSound()
   const onClick = () => {
-    if (volume) buttonSound();
-    if (propOnClick) propOnClick();
-  };
+    if (volume) buttonSound()
+    if (propOnClick) propOnClick()
+  }
 
   return (
     <button
@@ -31,5 +31,5 @@ export const Button: React.FC<ButtonProps> = ({
       <Icon name={icon} size="md" />
       {children}
     </button>
-  );
-};
+  )
+}

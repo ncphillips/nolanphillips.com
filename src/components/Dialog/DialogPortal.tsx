@@ -1,39 +1,39 @@
-import { useCallback, useEffect, useState } from "react";
-import { createPortal } from "react-dom";
+import { useCallback, useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 
 export type DialogPortalProps = {
-  portalId?: string;
-};
+  portalId?: string
+}
 
 export const DialogPortal: React.FC<DialogPortalProps> = ({
   portalId = "dialogs",
   children,
 }) => {
-  const [containerNode, setContainerNode] = useState();
+  const [containerNode, setContainerNode] = useState()
 
   const setContainerNodeRef = useCallback((node) => {
     if (node !== null) {
-      setContainerNode(node);
+      setContainerNode(node)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    let container = document.getElementById(portalId);
+    let container = document.getElementById(portalId)
     if (!container) {
-      container = document.createElement("div");
-      container.setAttribute("id", portalId);
+      container = document.createElement("div")
+      container.setAttribute("id", portalId)
 
-      document.body.appendChild(container);
+      document.body.appendChild(container)
     }
 
-    setContainerNodeRef(container);
+    setContainerNodeRef(container)
 
     return () => {
       if (container?.childNodes.length === 1) {
-        container!.remove();
+        container!.remove()
       }
-    };
-  }, [setContainerNode]);
+    }
+  }, [setContainerNode])
 
-  return containerNode ? createPortal(children, containerNode) : null;
-};
+  return containerNode ? createPortal(children, containerNode) : null
+}
