@@ -4,7 +4,7 @@ export type CardProps = {} & PropsWithChildren
 
 export const Card: React.FC<CardProps> = ({ children }) => {
   return (
-    <div className="w-full bg-zinc-50 dark:bg-zinc-800 overflow-hidden rounded-md border-1 border-white dark:border-zinc-900 ring-1 ring-zinc-200 dark:ring-zinc-700 shadow-md dark:drop-shadow-md p-3">
+    <div className="border-1 w-full overflow-hidden rounded-md border-white bg-zinc-50 p-3 shadow-md ring-1 ring-zinc-200 dark:border-zinc-900 dark:bg-zinc-800 dark:ring-zinc-700 dark:drop-shadow-md">
       {children}
     </div>
   )

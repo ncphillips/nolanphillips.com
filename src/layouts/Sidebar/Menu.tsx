@@ -3,12 +3,12 @@ import Text from "../../components/typography/Text"
 import { MenuItem as MenuItemProps, menuItems } from "../../content/_menu"
 
 export const Menu = () => (
-  <ul className="flex flex-col gap-2 mt-4">
+  <ul className="mt-4 flex flex-col gap-2">
     {menuItems.map((menuItem) => {
       if ("items" in menuItem) {
         return (
           <li className="mt-4">
-            <span className="inline-block ml-2 pb-1">
+            <span className="ml-2 inline-block pb-1">
               <Text size="sm">
                 <strong>{menuItem.name}</strong>
               </Text>
@@ -42,11 +42,11 @@ const MenuItem: React.FC<MenuItemProps & { active?: true }> = ({
 
   return (
     <a href={href} rel="prefetch" target={isExternal ? "_blank" : "_self"}>
-      <li className="relative group p-2 text-zinc-800 dark:text-zinc-50 dark:hover:text-white">
+      <li className="group relative p-2 text-zinc-800 dark:text-zinc-50 dark:hover:text-white">
         <span className={classes.join(" ")} />
         <span className="relative z-10">
           <Text as="span" size="sm" color="inherit">
-            <span className="flex flex-row gap-2 items-center">
+            <span className="flex flex-row items-center gap-2">
               <Icon name={icon} />
               {name}
               {isExternal && <Icon name="external-link" />}

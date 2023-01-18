@@ -18,8 +18,8 @@ export const Icon: React.FC<IconProps> = ({ name, fill, size = "xs" }) => {
 
   if (fill) {
     return (
-      <span className="group relative inline-block px-1 mx-2">
-        <span className="absolute z-0 -inset-1 group-hover:-inset-2 group-active:-inset-1 rounded-full bg-zinc-200 dark:bg-zinc-800 group-hover:opacity-100 group-active:opacity-100 transition-all duration-200 ease-bounce" />
+      <span className="group relative mx-2 inline-block px-1">
+        <span className="ease-bounce absolute -inset-1 z-0 rounded-full bg-zinc-200 transition-all duration-200 group-hover:-inset-2 group-hover:opacity-100 group-active:-inset-1 group-active:opacity-100 dark:bg-zinc-800" />
         <span className="relative z-10">
           <i className={classes.join(" ")} />
         </span>

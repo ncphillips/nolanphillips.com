@@ -40,13 +40,13 @@ export const components = {
   span: (props: any) => <Text as="span" {...props} />,
   ul: (props: any) => (
     <ul
-      className="list-disc list-outside text-slate-900 dark:text-slate-50 pl-6 pt-2 mb-4"
+      className="mb-4 list-outside list-disc pl-6 pt-2 text-slate-900 dark:text-slate-50"
       {...props}
     />
   ),
   ol: (props: any) => (
     <ol
-      className="list-decimal list-outside text-slate-900 dark:text-slate-50 pl-6 pt-2 mb-4"
+      className="mb-4 list-outside list-decimal pl-6 pt-2 text-slate-900 dark:text-slate-50"
       {...props}
     />
   ),
@@ -56,7 +56,7 @@ export const components = {
     </li>
   ),
   blockquote: ({ children, ...props }: any) => (
-    <div className="border-l-4 pl-4 py-6 border-slate-200 dark:border-slate-700">
+    <div className="border-l-4 border-slate-200 py-6 pl-4 dark:border-slate-700">
       <Text as="p" {...props}>
         <strong>{children}</strong>
       </Text>

@@ -21,7 +21,7 @@ export const CardArticle: React.FC<CardArticleProps> = ({
 
   return (
     <a href={`/writing/${article.slug}`} rel="prefetch">
-      <article className="z-0 group relative flex flex-col gap-2 p-4">
+      <article className="group relative z-0 flex flex-col gap-2 p-4">
         <span className={classes.join(" ")} />
         <span className="relative z-10">
           <Heading as="h3" size={4}>

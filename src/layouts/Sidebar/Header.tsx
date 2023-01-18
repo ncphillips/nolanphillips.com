@@ -13,7 +13,7 @@ export const Header: React.FC<HeaderProps> = ({
   children,
 }) => {
   return (
-    <header className="flex width:100% lg:hidden flex-row items-center gap-1 basis-full shrink-0 h-12 relative z-30 sticky top-0 bg-zinc-100 bg-opacity-70 dark:bg-opacity-70 backdrop-blur-sm dark:bg-zinc-900 border-b border-1 border-zinc-200 dark:border-zinc-800 p-5">
+    <header className="width:100% border-1 relative sticky top-0 z-30 flex h-12 shrink-0 basis-full flex-row items-center gap-1 border-b border-zinc-200 bg-zinc-100 bg-opacity-70 p-5 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900 dark:bg-opacity-70 lg:hidden">
       {backHref && (
         <div className="-ml-3">
           <ButtonBack defaultHref={backHref} />

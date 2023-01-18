@@ -114,7 +114,7 @@ const Backdrop = () => {
 
   return (
     <button
-      className="z-40 lg:hidden fixed top-0 right-0 bottom-0 left-0 bg-black bg-opacity-50 backdrop-blur-sm"
+      className="fixed top-0 right-0 bottom-0 left-0 z-40 bg-black bg-opacity-50 backdrop-blur-sm lg:hidden"
       onClick={toggleSidebar}
     />
   )

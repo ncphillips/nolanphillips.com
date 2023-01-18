@@ -20,7 +20,7 @@ export const Panel: React.FC<PanelProps> = ({
 
   return (
     <nav className={classes.join(" ")}>
-      <header className="hidden relative -mx-6 lg:flex flex-row justify-between gap-2 shrink-0 sticky top-0 bg-zinc-100 bg-opacity-70 dark:bg-opacity-70 backdrop-blur-sm dark:bg-zinc-900 border-b border-1 border-zinc-200 dark:border-zinc-800 p-5 pb-2">
+      <header className="border-1 relative sticky top-0 -mx-6 hidden shrink-0 flex-row justify-between gap-2 border-b border-zinc-200 bg-zinc-100 bg-opacity-70 p-5 pb-2 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900 dark:bg-opacity-70 lg:flex">
         <Heading as="h2" size={4}>
           {title}
         </Heading>
