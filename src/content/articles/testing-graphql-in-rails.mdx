@@ -17,6 +17,7 @@ When we set out to test our GraphQL API we wanted 3 things:
 We needed some help. We want to write our queries as strings, and we don't want our specs to know about network requests. To take care of that, we create a helper method that we will include in all of our Specs.
 
 **spec/graphql_helper.rb**
+
 ```ruby
 module GraphqlHelper
   def gql(query)
@@ -32,6 +33,7 @@ end
 RSpec let's us add modules at configuration time:
 
 **spec/rails_helper.rb**
+
 ```ruby
 RSpec.configure do |config|
    config.include GraphqlHelper
@@ -45,6 +47,7 @@ end
 We're going to write a couple test for querying the currently logged in user.
 
 **spec/graph/current_user_spec.rb**
+
 ```ruby
 require 'rails_helper'
 
@@ -61,6 +64,7 @@ end
 Adding a query method to the test-class helps keep the individual specs clean. Let's add it as a private method so it's clearly separated from the specs:
 
 **spec/graph/current_user_spec.rb**
+
 ```ruby
 describe 'Current User Graph', type: :request do
   it 'is nil when not logged in'
@@ -82,13 +86,15 @@ describe 'Current User Graph', type: :request do
   end
 end
 ```
-It's often useful to dig the value you're interested in out of the response. This really makes checking the data easier. 
+
+It's often useful to dig the value you're interested in out of the response. This really makes checking the data easier.
 
 ## Testing the logged-out state
 
 There is no user when we're logged out, so we need to test for that. Thanks to our helpers it is a very small test:
 
 **spec/graph/current_user.rb**
+
 ```ruby
 describe 'Current User Graph', type: :request do
   it 'is nil when not logged in' do
@@ -96,19 +102,19 @@ describe 'Current User Graph', type: :request do
 
     expect(user_data).to be_nil
   end
-  
+
   #...
 end
 ```
 
 ## Testing the logged-in state
 
-
 **spec/graph/current_user_spec.rb**
+
 ```ruby
 describe 'Current User Graph', type: :request do
   # ...
-  
+
   it 'is the signed in user' do
     user = FactoryBot.create(:user)
     sign_in user
@@ -124,6 +130,7 @@ end
 ## Review
 
 Here is the end-state of our `current_user_spec`.
+
 ```ruby
 require 'rails_helper'
 
@@ -160,4 +167,3 @@ describe 'Current User Graph', type: :request do
   end
 end
 ```
-

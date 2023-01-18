@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from "react";
 
-export type ButtonProps = Omit<HTMLAttributes<HTMLButtonElement>, 'className'>
+export type ButtonProps = Omit<HTMLAttributes<HTMLButtonElement>, "className">;
 
 export const Button: React.FC<ButtonProps> = ({ children, ...props }) => (
   <button
@@ -9,4 +9,4 @@ export const Button: React.FC<ButtonProps> = ({ children, ...props }) => (
   >
     {children}
   </button>
-)
+);

@@ -1,6 +1,6 @@
 ---
 title: Can we make  a grammar for our design system?
-description: | 
+description: |
   Design tokens are not enough to ensure visual consistency. Could a grammar help us with that goal?
 created: 2021-06-18
 ---
@@ -9,14 +9,10 @@ As the only person building [HeartPayroll](https://heartpayroll.com) I find myse
 
 Much of what I've read and built around design systems has been about the individual components. These rules of thumb have helped make components that are easily reused in a variety of context. While this has been massive benefit, I still find myself struggling to consistently answer questions at the page level:
 
-* How much padding should be on the page?
-    
-* How much big should the gap be between the Heading and Headline?
-    
-* Should those Cards be grouped together?
-    
-* Does the submit button float left or right in the Card?
-    
+- How much padding should be on the page?
+- How much big should the gap be between the Heading and Headline?
+- Should those Cards be grouped together?
+- Does the submit button float left or right in the Card?
 
 I have been struggling with these questions because **what I have is a language without a grammar**. A bunch of words with definitions, but with no syntax to bind them together.
 
@@ -32,44 +28,44 @@ This question has really interested me, so I've started to define a [Formal gram
 # At least 1: +
 # Or: ||
 
-Page –> 
-  Title 
+Page –>
+  Title
   Layout
 
-Layout –> 
-  Navigation? 
-  Main 
+Layout –>
+  Navigation?
+  Main
   Footer?
 
-Main –> 
+Main –>
   Header
   Content
 
-Header –> 
-  Backlink? 
-  Heading 
+Header –>
+  Backlink?
+  Heading
   Headline?
 
-Content –> 
+Content –>
   Card*
 
-Card –> 
-  Heading 
+Card –>
+  Heading
   .*
 
-Form –> 
-  Fieldset+  
+Form –>
+  Fieldset+
   FormResponse
 
-Fieldset –> 
-  Legend? 
+Fieldset –>
+  Legend?
   Field+
 
-FormActions –> 
-  Submit 
+FormActions –>
+  Submit
   Cancel?
 
-FormResponse –> 
+FormResponse –>
   SuccessResponse || FailureResponse
 ```
 

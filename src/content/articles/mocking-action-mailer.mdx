@@ -3,19 +3,20 @@ title: How to Mock ActionMailer
 description: Using RSpec custom matchers to make clean ActionMailer mocks.
 ---
 
-The Rails `ActionMailer` is a pretty useful tool. 
+The Rails `ActionMailer` is a pretty useful tool.
 
 Unfortunately, it's extremely awkward to mock for tests.
 
-Since these emails are critical to our business I spent some time looking at how to write clean test to make sure my mailers are called when they should be. 
+Since these emails are critical to our business I spent some time looking at how to write clean test to make sure my mailers are called when they should be.
 
 ## The Business Case
 
-So we're working on a Point of Sale for the the [Frosty Treat](https://www.frostytreat.ca/) in Kengsington PEI. The CEO is all about data and dopamine rushes, so they want to get an email *every time* a banana gets split...for whatever reason. 
+So we're working on a Point of Sale for the the [Frosty Treat](https://www.frostytreat.ca/) in Kengsington PEI. The CEO is all about data and dopamine rushes, so they want to get an email _every time_ a banana gets split...for whatever reason.
 
 Here's what our test should roughly look like:
 
 **spec/banana_spec.rb**
+
 ```ruby
 it 'sends an :banana_split email after being #split' do
   banana = Banana.new
@@ -31,6 +32,7 @@ end
 The ActionMailer API is nice to work with...but involves a lot of weird objects. After a bit of fiddling around and searching through [StackOverflow](https://stackoverflow.com/questions/45207926/can-not-test-mailer-action-called-in-rspec-rails) we find the magic spell we need:
 
 **spec/banana_spec.rb**
+
 ```ruby
 it 'sends an :banana_split email after being #split' do
   mailer = double(:mailer)
@@ -46,7 +48,7 @@ it 'sends an :banana_split email after being #split' do
 end
 ```
 
-Great! It works. 
+Great! It works.
 
 It's a mess though, and the thought of writing that every time I need to test a mailer is enough to keep me from ever writing a mailer test again.
 
@@ -59,6 +61,7 @@ RSpec makes it easy to create [custom matchers](https://relishapp.com/rspec/rspe
 Let's build a super simple example:
 
 **spec/action_mailer_helper.rb**
+
 ```ruby
 RSpec::Matchers.define :deliver_later do |expected_method|
   match do |mailer_class|
@@ -75,6 +78,7 @@ end
 And don't forget to add it to your `rails_helper` to make it available.
 
 **spec/rails_helper.rb**
+
 ```diff
 require 'rails_helper'
 + require 'action_mailer_helper'
@@ -85,6 +89,7 @@ require 'rails_helper'
 With our new helper added we can really clean things up in our tests:
 
 **spec/banana_spec.rb**
+
 ```ruby
 it 'sends an :banana_split email after being #split' do
   expect(BananaMailer).to deliver_later(:banana_split)
@@ -95,6 +100,6 @@ it 'sends an :banana_split email after being #split' do
 end
 ```
 
-Voila! 
+Voila!
 
 A clear spec to make sure the Frosty Treat CEO will be happy for a long time.

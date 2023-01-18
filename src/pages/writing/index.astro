@@ -1,19 +1,26 @@
 ---
-import { basename } from 'path'
-import Layout from '../../layouts/Layout.astro';
-import SidebarLayout from '../../layouts/Sidebar';
-import { CardArticle } from '../../components/CardArticle';
-import Heading from '../../components/typography/Heading';
+import { basename } from "path";
+import Layout from "../../layouts/Layout.astro";
+import SidebarLayout from "../../layouts/Sidebar";
+import { CardArticle } from "../../components/CardArticle";
+import Heading from "../../components/typography/Heading";
 
-const title = "Writing"
-const articles = (await Astro.glob('../../content/articles/*.{md,mdx}'))
-  .map(article => ({
-    ...article,
-    slug: basename(article.file).split('.')[0]
-  } as any))
-  .filter(article => article.frontmatter.category === Astro.params.category)
-  .sort((a, b) => Date.parse(b.frontmatter.created) - Date.parse(a.frontmatter.created))
+const title = "Writing";
+const articles = (await Astro.glob("../../content/articles/*.{md,mdx}"))
+  .map(
+    (article) =>
+      ({
+        ...article,
+        slug: basename(article.file).split(".")[0],
+      } as any)
+  )
+  .filter((article) => article.frontmatter.category === Astro.params.category)
+  .sort(
+    (a, b) =>
+      Date.parse(b.frontmatter.created) - Date.parse(a.frontmatter.created)
+  );
 ---
+
 <Layout title="Writing">
   <SidebarLayout.Header title={title} />
   <SidebarLayout>
@@ -25,9 +32,7 @@ const articles = (await Astro.glob('../../content/articles/*.{md,mdx}'))
         <Heading as="h2">Writing</Heading>
       </span>
       <div class="-mx-4 flex z-40 flex-col">
-        {articles.map(article => (
-          <CardArticle article={article} />
-        ))}
+        {articles.map((article) => <CardArticle article={article} />)}
       </div>
     </SidebarLayout.Panel>
     <SidebarLayout.Pane dots />

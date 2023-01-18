@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 import prefetch from "@astrojs/prefetch";
@@ -16,10 +16,15 @@ import readingMdxTime from "remark-reading-time/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [prefetch(), react(), vue(), mdx({
-    remarkPlugins: [readingTime, readingMdxTime]
-  })],
+  integrations: [
+    prefetch(),
+    react(),
+    vue(),
+    mdx({
+      remarkPlugins: [readingTime, readingMdxTime],
+    }),
+  ],
   markdown: {
-    syntaxHighlight: 'prism'
+    syntaxHighlight: "prism",
   },
 });

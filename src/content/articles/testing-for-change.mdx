@@ -3,17 +3,18 @@ title: Testing for Change
 description: How using the RSpec `change` matcher can make your Rails tests easier to read and maintain.
 ---
 
-Writing tests that check that a value you don't control has changed is a weird thing. 
+Writing tests that check that a value you don't control has changed is a weird thing.
 
 To help out, RSpec provides a [change matcher](https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/change-matcher) that can help make things easier.
 
-Let's look at an example of how we can use the [change matcher](https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/change-matcher) to create more robust tests for our Rails app. 
+Let's look at an example of how we can use the [change matcher](https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/change-matcher) to create more robust tests for our Rails app.
 
 ## The Problem: Tracking Changes to our Models
 
 We have a `User` model and want to make sure that anytime it's changed, a `Trail` is created to record that change. Here are the models:
 
 **app/models/user.rb**
+
 ```ruby
 # == Schema Information
 #
@@ -26,7 +27,9 @@ class User < ApplicationRecord
   has_many :trails, as: :origin
 end
 ```
+
 **app/models/trail.rb**
+
 ```ruby
 # == Schema Information
 #
@@ -42,11 +45,13 @@ class Trail < ApplicationRecord
   belongs_to :origin, polymorphic: true
 end
 ```
+
 ## Making Trails after update
 
-Our first goal, is to make it so a `Trail` record is created anytime a user's first name is changed. 
+Our first goal, is to make it so a `Trail` record is created anytime a user's first name is changed.
 
 **spec/models/user_spec.rb**
+
 ```ruby
 describe User do
   it 'creates a trail when the first_name is changed' do
@@ -55,42 +60,44 @@ describe User do
     user.update(first_name: 'Something New')
 
     expect(user.trails.where(attr_changed: 'first_name').count ).to be(1)
-  end 
+  end
 end
 ```
 
-One way to  make *only* this test pass would be to add callback to our `User` model:
+One way to make _only_ this test pass would be to add callback to our `User` model:
 
 **app/models/user.rb**
+
 ```ruby
 class User < ApplicationRecord
   has_many :trails, as: :origin
   after_update :create_trail
 
   private
-  
+
   def create_trail
     return unless first_name_previously_changed?
 
     Trail.create(
-      origin: self, 
-      attr_changed: 'first_name', 
+      origin: self,
+      attr_changed: 'first_name',
       from: first_name_previously_was,
       to: first_name,
   end
 end
 ```
 
-This is great! 
+This is great!
 
-Our tests passes. It's easy to read. What could go wrong? If we change the requirements so that a trail is made when we create the `User` then 
-things get a little funny. 
+Our tests passes. It's easy to read. What could go wrong? If we change the requirements so that a trail is made when we create the `User` then
+things get a little funny.
 
 ## Making Trails after create
 
 After adding a new spec to make sure trails are made on create:
 
 **spec/models/user_spec.rb**
+
 ```ruby
   it 'creates first_name trail when the user is created ' do
     user = FactoryBot.build(:user)
@@ -98,11 +105,13 @@ After adding a new spec to make sure trails are made on create:
     user.save
 
     expect(user.trails.count).to be(1)
-  end 
+  end
 ```
+
 We update our callback to run more generally:
 
 **app/models/user.rb**
+
 ```diff
 class User < ApplicationRecord
   has_many :trails, as: :origin
@@ -114,15 +123,16 @@ We'll see that our new spec passes (woo!) but our first spec fails (boo!).
 
 ## Magic Numbers
 
-The problem with our specs is they rely on magic numbers. We've made too hard of a rule: there must be precisely `1` trail for our user after we've changed it's first_name. 
+The problem with our specs is they rely on magic numbers. We've made too hard of a rule: there must be precisely `1` trail for our user after we've changed it's first_name.
 
 How do we fix this weirdness?
 
 ## Option 1: More Setup
 
-A little more setup could get us what we needed. By recording the previous count, we calculate the next count and match against that. 
+A little more setup could get us what we needed. By recording the previous count, we calculate the next count and match against that.
 
 **spec/models/user_spec.rb**
+
 ```ruby
 describe User do
   it 'creates first_name trail when the user is created ' do
@@ -131,7 +141,7 @@ describe User do
     user = FactoryBot.create(:user)
 
     expect(user.trails.where(attr_changed: 'first_name').count ).to be(next_trails_count)
-  end 
+  end
 
   it 'creates a trail when the first_name is changed' do
     user = FactoryBot.create(:user)
@@ -141,19 +151,20 @@ describe User do
     user.update(first_name: 'Something New')
 
     expect(user.trails.where(attr_changed: 'first_name').count).to be(next_trails_count)
-  end 
+  end
 end
 ```
 
 No more magic numbers!
 
-Unfortunately it is a lot more to read and our specs are not as straight-forward as they once were. 
+Unfortunately it is a lot more to read and our specs are not as straight-forward as they once were.
 
 ## Option 2: Expecting Change
 
 RSpec's `change` matcher is meant for situations just like these. When we pass a block to both the `expect` and `change` methods it we can hide all the setup we had to define explicitly in the examples above. Here's what those two tests would look like re-written with `change`:
-  
+
 **spec/models/user_spec.rb**
+
 ```ruby
 describe User do
   it 'creates first_name trail when the user is created ' do
@@ -162,7 +173,7 @@ describe User do
     expect { user.save }.to(
       change { user.trails.where(attr_changed: 'first_name').count }
     )
-  end 
+  end
 
   it 'creates a trail when the first_name is changed' do
     user = FactoryBot.create(:user)
@@ -170,7 +181,7 @@ describe User do
     expect { user.update(first_name: 'Something New') }.to(
       change { user.trails.where(attr_changed: 'first_name').count }
     )
-  end 
+  end
 end
 ```
 
@@ -179,11 +190,13 @@ end
 These `change` expectations are a bit confusing at first glance, so let's try to break it down.
 
 Here is the basic structure
+
 ```ruby
 expect(block_that_does_something).to change(block_that_gets_value)
 ```
 
 A rough re-write of this execution path might look like this:
+
 ```ruby
 previous_value = block_that_gets_value.call()
 
@@ -196,6 +209,6 @@ expect(next_value).to_not be(previous_value)
 
 ## Expecting more
 
-There's more to the `change` matcher then I've shown here. Auxiliary methods allow us to specify by how much the value should change, exactly what it should change too, and also assert that it did *not* change.
+There's more to the `change` matcher then I've shown here. Auxiliary methods allow us to specify by how much the value should change, exactly what it should change too, and also assert that it did _not_ change.
 
 To learn more about these methods you can visit the [RSpec Documentation](https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/change-matcher)

@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 export const useButtonSound = () => {
-  const [audio, setAudio] = useState<HTMLAudioElement | undefined>()
+  const [audio, setAudio] = useState<HTMLAudioElement | undefined>();
   const play = () => {
-    if (audio) audio.play()
-  }
+    if (audio) audio.play();
+  };
   useEffect(() => {
-    const audioEl = new Audio('/audio/click.mp3')
+    const audioEl = new Audio("/audio/click.mp3");
 
-    setAudio(audioEl)
-  }, [])
+    setAudio(audioEl);
+  }, []);
 
-  return [play] as const
-}
+  return [play] as const;
+};
