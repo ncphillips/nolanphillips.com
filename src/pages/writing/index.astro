@@ -31,7 +31,7 @@ const articles = (await Astro.glob("../../content/articles/*.{md,mdx}"))
       <span class="lg:hidden">
         <Heading as="h2">Writing</Heading>
       </span>
-      <div class="-mx-4 flex z-40 flex-col">
+      <div class="z-40 -mx-4 flex flex-col">
         {articles.map((article) => <CardArticle article={article} />)}
       </div>
     </SidebarLayout.Panel>
