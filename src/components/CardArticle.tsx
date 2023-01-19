@@ -1,6 +1,6 @@
 import { prettyDate } from "../lib/prettyDate"
-import Heading from "./typography/Heading"
-import Text from "./typography/Text"
+import Heading from "@ds/Heading"
+import Text from "@ds/Text"
 
 export type Article = any
 

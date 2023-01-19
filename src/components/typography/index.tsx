@@ -1,5 +1,5 @@
-import Heading from "./Heading"
-import Text from "./Text"
+import Heading from "@ds/Heading"
+import Text from "@ds/Text"
 
 export const components = {
   h1: (props: any) => (

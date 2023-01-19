@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { usePreventScroll } from "react-aria"
 import { ThemeToggle } from "../../components/ThemeToggle"
-import Heading from "../../components/typography/Heading"
+import Heading from "@ds/Heading"
 import { Menu } from "./Menu"
 
 export const SIDEBAR_EVENT = "sidebar.toggle"

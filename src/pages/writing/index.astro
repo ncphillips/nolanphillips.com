@@ -3,8 +3,8 @@ import { basename } from "path"
 import Layout from "../../layouts/Layout.astro"
 import SidebarLayout from "../../layouts/Sidebar"
 import { CardArticle } from "../../components/CardArticle"
-import Heading from "../../components/typography/Heading"
-import { getArticles } from "../../lib/articles"
+import Heading from "@ds/Heading"
+import { getArticles } from "articles"
 
 const title = "Writing"
 const articles = getArticles({ category: Astro.params.category })

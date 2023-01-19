@@ -1,7 +1,7 @@
 import { useButtonSound } from "../hooks/useButtonSound"
 import { useTheme } from "../hooks/useTheme"
-import { Button } from "./Button"
-import Icon from "./Icon"
+import { Button } from "@ds/Button"
+import Icon from "@ds/Icon"
 
 export const ThemeToggle = () => {
   const [play] = useButtonSound()

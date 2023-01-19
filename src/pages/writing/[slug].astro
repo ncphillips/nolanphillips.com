@@ -1,13 +1,12 @@
 ---
-import { basename } from "path"
 import Layout from "../../layouts/Layout.astro"
 import SidebarLayout from "../../layouts/Sidebar"
 import { CardArticle } from "../../components/CardArticle"
 import typography from "../../components/typography"
-import Heading from "../../components/typography/Heading"
 import { prettyDate } from "../../lib/prettyDate"
-import Text from "../../components/typography/Text"
-import { getArticleBySlug, getArticles } from "../../lib/articles"
+import Heading from "@ds/Heading"
+import Text from "@ds/Text"
+import { getArticleBySlug, getArticles } from "articles"
 
 const title = "Writing"
 const articles = getArticles()

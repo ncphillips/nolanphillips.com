@@ -1,11 +1,11 @@
-import Icon from "../../components/Icon"
-import Text from "../../components/typography/Text"
+import Icon from "@ds/Icon"
+import Text from "@ds/Text"
 import {
   MenuCategory,
   MenuItem as MenuItemProps,
   menuItems,
 } from "../../content/_menu"
-import { cn } from "../../lib/cn"
+import { cn } from "cn"
 
 export const Menu = () => (
   <ul className="flex flex-col gap-2">

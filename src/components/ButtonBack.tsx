@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useButtonSound } from "../hooks/useButtonSound"
-import { Button } from "./Button"
-import Icon from "./Icon"
+import { Button } from "@ds/Button"
+import Icon from "@ds/Icon"
 
 export type BackButtonProps = {
   defaultHref?: string

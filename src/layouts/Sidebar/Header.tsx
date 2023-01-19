@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react"
 import ButtonBack from "../../components/ButtonBack"
-import Heading from "../../components/typography/Heading"
+import Heading from "@ds/Heading"
 
 export type HeaderProps = PropsWithChildren & {
   title: string

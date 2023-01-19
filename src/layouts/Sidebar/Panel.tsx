@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react"
-import Heading from "../../components/typography/Heading"
+import Heading from "@ds/Heading"
 
 export type PanelProps = PropsWithChildren & {
   title: string

@@ -1,7 +1,7 @@
 import type { HTMLAttributes, PropsWithChildren } from "react"
 import { useButtonSound } from "../../hooks/useButtonSound"
 import { useVolume } from "../../hooks/useVolume"
-import { Icon, IconName } from "../../components/Icon"
+import { Icon, IconName } from "@ds/Icon"
 
 export type ButtonProps = PropsWithChildren &
   Omit<HTMLAttributes<HTMLButtonElement>, "onClick"> & {
