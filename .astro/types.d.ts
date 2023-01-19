@@ -63,6 +63,20 @@ declare module 'astro:content' {
   collection: "articles",
   data: any
 },
+"implementing-shape-up.mdx": {
+  id: "implementing-shape-up.mdx",
+  slug: "implementing-shape-up",
+  body: string,
+  collection: "articles",
+  data: any
+},
+"jobs-to-be-done.mdx": {
+  id: "jobs-to-be-done.mdx",
+  slug: "jobs-to-be-done",
+  body: string,
+  collection: "articles",
+  data: any
+},
 "mocking-action-mailer.mdx": {
   id: "mocking-action-mailer.mdx",
   slug: "mocking-action-mailer",
