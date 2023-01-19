@@ -6,18 +6,9 @@ import Heading from "../components/typography/Heading"
 import Text from "../components/typography/Text"
 import Layout from "../layouts/Layout.astro"
 import SidebarLayout from "../layouts/Sidebar"
+import { getArticles } from "../lib/articles"
 
-const articles = (await Astro.glob("../content/articles/*.mdx"))
-  .map((article) => ({
-    ...article,
-    slug: basename(article.file).split(".")[0],
-  }))
-  .filter((article) => article.frontmatter.category === Astro.params.category)
-  .sort(
-    (a, b) =>
-      Date.parse(b.frontmatter.created) - Date.parse(a.frontmatter.created)
-  )
-  .splice(0, 4)
+const articles = getArticles().splice(0, 4)
 
 const title = "Nolan Phillips"
 ---

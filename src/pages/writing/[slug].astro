@@ -7,32 +7,20 @@ import typography from "../../components/typography"
 import Heading from "../../components/typography/Heading"
 import { prettyDate } from "../../lib/prettyDate"
 import Text from "../../components/typography/Text"
+import { getArticleBySlug, getArticles } from "../../lib/articles"
 
 const title = "Writing"
-const articles = (await Astro.glob("../../content/articles/*.mdx"))
-  .map((article) => ({
-    ...article,
-    slug: basename(article.file).split(".")[0],
-  }))
-  .filter((article) => article.frontmatter.category === Astro.params.category)
-  .sort(
-    (a, b) =>
-      Date.parse(b.frontmatter.created) - Date.parse(a.frontmatter.created)
-  )
-const article = articles.find((article) => article.slug === Astro.params.slug)!
+const articles = getArticles()
+const article = getArticleBySlug(Astro.params.slug || "")
+
 const { Content } = article
 
 export async function getStaticPaths() {
-  const articles = (await Astro.glob("../../content/articles/*.mdx")).map(
-    (article) => ({
-      ...article,
-      slug: basename(article.file).split(".")[0],
-    })
-  )
-
-  return articles.map((article) => ({
-    params: { slug: article.slug, category: article.frontmatter.category },
-  }))
+  return getArticles().map(function toStaticPaths(article) {
+    return {
+      params: { slug: article.slug, category: article.frontmatter.category },
+    }
+  })
 }
 ---
 
@@ -68,7 +56,7 @@ export async function getStaticPaths() {
           </Heading>
           <Text color="muted">
             <span class="break-keep"
-              >{prettyDate(article.frontmatter.created)} · {
+              >{prettyDate(article.frontmatter.created || "")} · {
                 (article as any).readingTime.text
               } min read</span
             >
