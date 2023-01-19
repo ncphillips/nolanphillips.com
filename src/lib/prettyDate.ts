@@ -5,10 +5,10 @@ export function prettyDate(date: Date | string) {
 
   if (typeof date === "undefined") return ""
 
-  const timestamp = date.getTime()
-  const seconds = Math.floor(timestamp / 1000)
-  const oldTimestamp = seconds - 86400
-  const difference = seconds - oldTimestamp
+  const currentTimestamp = Math.floor(Date.now() / 1000)
+  const createdTimestamp = Math.floor(date.getTime() / 1000)
+  const difference = currentTimestamp - createdTimestamp
+
   let output = ``
   if (difference < 60) {
     // Less than a minute has passed:
