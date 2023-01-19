@@ -4,7 +4,7 @@ import Layout from "../../layouts/Layout.astro"
 import SidebarLayout from "../../layouts/Sidebar"
 import { CardArticle } from "../../components/CardArticle"
 import Heading from "@ds/Heading"
-import { getArticles } from "articles"
+import { getArticles } from "@content/articles"
 
 const title = "Writing"
 const articles = getArticles({ category: Astro.params.category })

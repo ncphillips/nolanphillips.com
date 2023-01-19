@@ -23,7 +23,7 @@ type Options = {
 
 export const getArticles = (options?: Options) => {
   const pathsToArticles = import.meta.glob<true, string, any>(
-    "../content/articles/*.{md,mdx}",
+    "../../content/articles/*.{md,mdx}",
     { eager: true }
   )
 
