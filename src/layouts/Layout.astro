@@ -22,15 +22,14 @@ const { title } = Astro.props
     <link rel="stylesheet" href="/css/prism.css" />
     <script is:inline define:vars={{ THEME_COOKIE }}>
       const override = window.localStorage.getItem(THEME_COOKIE)
-      const prefersDark =
-        override === "dark" ||
-        (!override && window.matchMedia("(prefers-color-scheme: dark)").matches)
+      const prefersDark = override === 'dark' || !override && window.matchMedia('(prefers-color-scheme: dark)').matches
       const root = document.documentElement
 
       if (prefersDark) {
-        root.classList.add("dark")
-      } else {
-        root.classList.remove("dark")
+        root.classList.add('dark')
+      }
+      else {
+        root.classList.remove('dark')
       }
     </script>
   </head>
