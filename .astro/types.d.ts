@@ -105,6 +105,13 @@ declare module 'astro:content' {
   collection: "articles",
   data: any
 },
+"who-does-it-serve.mdx": {
+  id: "who-does-it-serve.mdx",
+  slug: "who-does-it-serve",
+  body: string,
+  collection: "articles",
+  data: any
+},
 },
 
 	};

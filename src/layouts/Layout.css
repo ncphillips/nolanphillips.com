@@ -9,3 +9,7 @@ a:link {
 .dark a:link {
   color: var(--tw-color-red);
 }
+
+p + p {
+  margin-top: 1.5em;
+}
